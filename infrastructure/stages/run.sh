@@ -20,6 +20,7 @@ change_stage() {
     local name=$1
     echo "Stage: $name"
     cd "$start_dir/$name"
+    export PG_SCHEMA_NAME="$name"
 }
 
 init_plan_apply() {
@@ -38,3 +39,6 @@ init_plan_apply
 export PG_CONN_STR=$(tofu output -raw psql_url)
 
 change_stage "1-github"
+check_variable "PG_CONN_STR"
+check_variable "PG_SCHEMA_NAME"
+init_plan_apply
