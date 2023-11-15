@@ -22,5 +22,6 @@ resource "improvmx_email_forward" "billing" {
 }
 
 output "email_aliases" {
-  value = [improvmx_email_forward.catch_all, improvmx_email_forward.contact, improvmx_email_forward.billing]
+  value       = [improvmx_email_forward.catch_all, improvmx_email_forward.contact, improvmx_email_forward.billing]
+  description = "A list of the email aliases configurations"
 }

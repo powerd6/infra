@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.6.0"
   backend "pg" {
   }
   required_providers {
@@ -45,5 +46,7 @@ resource "github_organization_settings" "powerd6" {
 }
 
 output "gh_org_id" {
-  value = github_organization_settings.powerd6.id
+  value       = github_organization_settings.powerd6.id
+  sensitive   = true
+  description = "The organization ID as-shown in the Github API. This is useful for automation and programatic use, as some APIs do not accept the organization name as a parameter."
 }

@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.6.0"
   required_providers {
     github = {
       source  = "integrations/github"
@@ -26,6 +27,7 @@ variable "topics" {
 resource "github_repository" "repository" {
   name        = var.name
   description = var.description
+  topics      = var.topics
 
   visibility = "public"
 
@@ -68,11 +70,11 @@ resource "github_branch_default" "default" {
 }
 
 resource "github_repository_file" "readme" {
-  repository          = github_repository.repository.name
-  branch              = github_branch_default.default.branch
-  file                = "README.md"
-  content             = templatefile("${path.module}/README.md.tftpl", {
-    name = var.name
+  repository = github_repository.repository.name
+  branch     = github_branch_default.default.branch
+  file       = "README.md"
+  content = templatefile("${path.module}/README.md.tftpl", {
+    name        = var.name
     description = var.description
   })
   commit_message      = "Managed by IaC"
@@ -81,19 +83,21 @@ resource "github_repository_file" "readme" {
   overwrite_on_create = false
 
   lifecycle {
-    ignore_changes = [ 
-        content,
-        commit_message,
-commit_author,
-commit_email
-     ]
+    ignore_changes = [
+      content,
+      commit_message,
+      commit_author,
+      commit_email
+    ]
   }
 }
 
 output "repository_url" {
-    value = github_repository.repository.git_clone_url
+  value       = github_repository.repository.git_clone_url
+  description = "The URL of the repository for cloning purposes."
 }
 
 output "repository_url_web" {
-    value = github_repository.repository.html_url  
+  value       = github_repository.repository.html_url
+  description = "The URL of the repository in the Github webpage."
 }

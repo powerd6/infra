@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.6.0"
   backend "pg" {
   }
   required_providers {
@@ -42,7 +43,8 @@ resource "gandi_domain" "powerd6_org" {
 }
 
 output "domain_name" {
-  value = gandi_domain.powerd6_org.name
+  value       = gandi_domain.powerd6_org.name
+  description = "The top level domain for the project"
 }
 
 resource "gandi_nameservers" "ns" {
@@ -56,5 +58,6 @@ resource "gandi_nameservers" "ns" {
 }
 
 output "domain_ns" {
-  value = gandi_nameservers.ns.nameservers
+  value       = gandi_nameservers.ns.nameservers
+  description = "The name servers used by the domain"
 }

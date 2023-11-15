@@ -18,6 +18,7 @@ resource "github_membership" "members" {
 }
 
 output "administators" {
-  value     = local.admins
-  sensitive = true
+  value       = local.admins
+  description = "The list of administrators for the organization."
+  sensitive   = true
 }
