@@ -18,7 +18,9 @@ Stages are named with the following convention: `<order>-<name>`.
 
 Stages with the same order can be executed in parallel.
 
-Stages can only depend on stages that come before them (with a lower `order` number), and they do so by referencing the remote state. This means that anything that will be used by higher stages must be set as an output of the previous stages.
+Stages can only depend on stages that come before them (with a lower `order` number),
+ and they do so by referencing the remote state. This means that anything that
+ will be used by higher stages must be set as an output of the previous stages.
 
 ### Modules
 
