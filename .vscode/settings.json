@@ -3,6 +3,8 @@
     "**/*.md.tftpl": "markdown"
   },
   "cSpell.words": [
-    "powerd6"
+    "elephantsql",
+    "powerd6",
+    "PSQL"
   ]
 }
