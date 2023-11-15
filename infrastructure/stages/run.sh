@@ -25,7 +25,7 @@ change_stage() {
 
 init_plan_apply() {
     tofu init
-    tofu plan -out plan -json
+    tofu plan -out plan
     wait_for_enter
     tofu apply "plan"
     rm plan
