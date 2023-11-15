@@ -54,3 +54,7 @@ init_plan_apply
 change_stage "2-domain"
 check_variable "GANDI_KEY"
 init_plan_apply
+
+change_stage "3-email"
+check_variable "IMPROVMX_API_TOKEN"
+init_plan_apply
