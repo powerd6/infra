@@ -2,11 +2,11 @@ terraform {
   required_version = ">= 1.6.0"
   required_providers {
     null = {
-      source = "hashicorp/null"
+      source  = "hashicorp/null"
       version = "3.2.1"
     }
     local = {
-      source = "hashicorp/local"
+      source  = "hashicorp/local"
       version = "2.4.0"
     }
   }
@@ -14,7 +14,7 @@ terraform {
 }
 
 variable "var_name" {
-  type = string
+  type        = string
   description = "The name of the environment variable that will be fetched"
 }
 
@@ -31,19 +31,19 @@ resource "null_resource" "read_with_cli" {
 }
 
 data "local_file" "temp_file" {
-  depends_on    = [ null_resource.read_with_cli]
-  filename      = "${path.module}/${var.var_name}.var" 
+  depends_on = [null_resource.read_with_cli]
+  filename   = "${path.module}/${var.var_name}.var"
 }
 
 resource "null_resource" "delete_temp_file" {
-  depends_on    = [ data.local_file.temp_file]
-  triggers = { always_run = timestamp() }
+  depends_on = [data.local_file.temp_file]
+  triggers   = { always_run = timestamp() }
   provisioner "local-exec" {
     command = "rm ${path.module}/${var.var_name}.var"
   }
 }
 
 output "value" {
-  value = chomp(data.local_file.temp_file.content)
+  value       = chomp(data.local_file.temp_file.content)
   description = "The value of the environment variable"
 }

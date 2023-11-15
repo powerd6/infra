@@ -8,6 +8,8 @@ It creates the PostgreSQL database that will be used to store other state files.
 
 You must provide the following environment variables:
 
-| variable | Description | Where to find it|
-| ---: | :--- | :--- |
-| `ELEPHANTSQL_APIKEY` | A "Full Access key" for the [ElephantSQL](https://www.elephantsql.com/) account. | [here](https://customer.elephantsql.com/apikeys) |
+### `ELEPHANTSQL_APIKEY`
+
+A "Full Access key" for the [ElephantSQL](https://www.elephantsql.com/) account.
+
+Retrieved [here](https://customer.elephantsql.com/apikeys).
