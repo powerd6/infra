@@ -25,9 +25,17 @@ change_stage() {
 
 init_plan_apply() {
     tofu init
-    tofu plan -out plan
-    wait_for_enter
-    tofu apply "plan"
+    tofu plan -out plan -detailed-exitcode
+    plan_exit_code=$?
+    if [ $plan_exit_code -eq 0 ]; then
+        echo "No changes... skipping apply"
+    elif [ $plan_exit_code -eq 1 ]; then
+        echo "Error: Plan failed!"
+        exit 1
+    else
+        wait_for_enter
+        tofu apply "plan"
+    fi
     rm plan
 }
 
@@ -41,4 +49,8 @@ export PG_CONN_STR=$(tofu output -raw psql_url)
 change_stage "1-github"
 check_variable "PG_CONN_STR"
 check_variable "PG_SCHEMA_NAME"
+init_plan_apply
+
+change_stage "2-domain"
+check_variable "GANDI_KEY"
 init_plan_apply
