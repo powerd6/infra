@@ -24,6 +24,8 @@ This stage provision the github organization and sets it up to be used elsewhere
 
 This stage provisions the [Gandi](https://www.gandi.net/) domain name and DNS records.
 
+It referers to the repositories from stage one that require "pages" in order to creat the appropriate verification records.
+
 ### 3: Email
 
 This stage provisions the [ImprovMX](https://improvmx.com/) email aliases.
