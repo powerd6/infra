@@ -26,8 +26,12 @@ From this moment forward, available as a GitHub Organization secret.
 
 A GitHub Personal Access Token (PAT) with the following permissions:
 
-- Overview
-  - N/A
+- Repository access: All repositories
+- Repository permissions
+  - Administration: Read and write
+  - Commit statuses: Read and write
+  - Contents: Read and write
+  - Metadata: Read-only
 - Organization permissions
   - Administration: Read and write
   - Members: Read and write
