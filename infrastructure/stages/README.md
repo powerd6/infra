@@ -18,4 +18,4 @@ It initializes a postgres database with [ElephantSQL](https://www.elephantsql.co
 
 ### 1: Github
 
-This stage provision the github organization and sets it up to be used elsewhere
+This stage provision the github organization and sets it up to be used elsewhere.
