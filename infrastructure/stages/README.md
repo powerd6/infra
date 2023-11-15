@@ -14,7 +14,7 @@ To execute all stages, run the following command and follow instructions: `./run
 
 This is the only stack that is provisioned with local state.
 
-It initializes a postgres database meant to be used by the other stages as the backed.
+It initializes a postgres database with [ElephantSQL](https://www.elephantsql.com/) meant to be used by the other stages as the backend.
 
 ### 1: Github
 
