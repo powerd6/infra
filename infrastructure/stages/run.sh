@@ -27,6 +27,7 @@ init_plan_apply() {
     tofu plan -out plan
     wait_for_enter
     tofu apply "plan"
+    rm plan
 }
 
 echo "Executing all stages..."
