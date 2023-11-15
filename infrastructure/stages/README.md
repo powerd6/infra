@@ -8,6 +8,26 @@ As a rule, dependencies can never go from a lower stage to a higher one. Depende
 
 To execute all stages, run the following command and follow instructions: `./run.sh`
 
+### Common mistakes:
+
+When running `tofu` commands or the script, if you see a message similar to this 
+
+```bash
+Initializing the backend...
+╷
+│ Error: dial tcp [::1]:5432: connect: connection refused
+│ 
+│ 
+╵
+```
+
+It means you have not initialized the correct environment variables for the postgres backend to succesfully connect.
+
+To fix this, set the following variables, with the correct value for the module you are executing:
+
+- `PG_CONN_STR`
+- `PG_SCHEMA_NAME`
+
 ## Stacks
 
 ### 0: State
