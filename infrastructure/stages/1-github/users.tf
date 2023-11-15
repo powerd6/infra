@@ -18,6 +18,6 @@ resource "github_membership" "members" {
 }
 
 output "administators" {
-  value = local.admins
+  value     = local.admins
   sensitive = true
 }
