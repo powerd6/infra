@@ -33,6 +33,6 @@ resource "null_resource" "delete_temp_file" {
 }
 
 output "value" {
-  value = data.local_file.temp_file.content
+  value = chomp(data.local_file.temp_file.content)
   description = "The value of the environment variable"
 }
