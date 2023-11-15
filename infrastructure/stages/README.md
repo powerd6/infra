@@ -19,3 +19,11 @@ It initializes a postgres database with [ElephantSQL](https://www.elephantsql.co
 ### 1: Github
 
 This stage provision the github organization and sets it up to be used elsewhere.
+
+### 2: Domain
+
+This stage provisions the [Gandi](https://www.gandi.net/) domain name and DNS records.
+
+### 3: Email
+
+This stage provisions the [ImprovMX](https://improvmx.com/) email aliases.
