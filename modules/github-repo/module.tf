@@ -37,11 +37,13 @@ resource "github_repository" "repository" {
   has_wiki        = false
   has_downloads   = false
 
-  allow_merge_commit  = false
-  allow_squash_merge  = true
-  allow_rebase_merge  = true
-  allow_auto_merge    = false
-  allow_update_branch = true
+  allow_merge_commit          = false
+  allow_squash_merge          = true
+  squash_merge_commit_message = "COMMIT_MESSAGES"
+  squash_merge_commit_title   = "COMMIT_OR_PR_TITLE"
+  allow_rebase_merge          = true
+  allow_auto_merge            = false
+  allow_update_branch         = true
 
   auto_init          = true
   archive_on_destroy = true
@@ -100,4 +102,9 @@ output "repository_url" {
 output "repository_url_web" {
   value       = github_repository.repository.html_url
   description = "The URL of the repository in the Github webpage."
+}
+
+output "repo_id" {
+  value       = github_repository.repository.repo_id
+  description = "The ID of the repository, to be used when referring to it programatically"
 }
