@@ -22,7 +22,6 @@ jobs:
           - uses: opentofu/setup-opentofu@v1
           - name: Check format
             id: check
-            working-directory: infrastructure
             run: tofu fmt -check -recursive -diff
   tflint:
     name: TFLint
@@ -34,7 +33,6 @@ jobs:
           run: tflint --init
         - name: Run TFLint
           id: lint
-          working-directory: infrastructure
           run: tflint --recursive -f compact --minimum-failure-severity=warning
   markdown-lint:
     name: Markdown lint
