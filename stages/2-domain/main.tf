@@ -1,6 +1,7 @@
 terraform {
   required_version = ">= 1.6.0"
   backend "pg" {
+    schema_name = "2-domain"
   }
   required_providers {
     gandi = {
