@@ -1,5 +1,8 @@
 {
   "files.associations": {
     "**/*.md.tftpl": "markdown"
-  }
+  },
+  "cSpell.words": [
+    "powerd6"
+  ]
 }
