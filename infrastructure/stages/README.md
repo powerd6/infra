@@ -6,13 +6,16 @@ As a rule, dependencies can never go from a lower stage to a higher one. Depende
 
 ## Usage
 
-To execute all stages, run the following command:
+To execute all stages, run the following command and follow instructions: `./run.sh`
 
-<!-- TODO: write command to execute all stages -->
-```bash
-read -s PGUSER
-export PGUSER
-read -s PGPASSWORD
-export PGPASSWORD
-tofu init
-```
+## Stacks
+
+### 0: State
+
+This is the only stack that is provisioned with local state.
+
+It initializes a postgres database meant to be used by the other stages as the backed.
+
+### 1: Github
+
+This stage provision the github organization and sets it up to be used elsewhere
