@@ -1,3 +1,4 @@
+# TODO: Consoder moving this into a separate stage
 variable "elephantsql_api_key" {
   type        = string
   sensitive   = true

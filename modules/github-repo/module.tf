@@ -8,22 +8,6 @@ terraform {
   }
 }
 
-variable "name" {
-  type        = string
-  description = "The name of the repository"
-}
-
-variable "description" {
-  type        = string
-  description = "The description of the repository"
-}
-
-variable "topics" {
-  type        = set(string)
-  description = "The list of topics of the repository"
-  default     = []
-}
-
 resource "github_repository" "repository" {
   name        = var.name
   description = var.description
@@ -60,40 +44,6 @@ resource "github_repository" "repository" {
   ignore_vulnerability_alerts_during_read = true
 
 }
-
-resource "github_branch" "main" {
-  repository = github_repository.repository.name
-  branch     = "main"
-}
-
-resource "github_branch_default" "default" {
-  repository = github_repository.repository.name
-  branch     = github_branch.main.branch
-}
-
-resource "github_repository_file" "readme" {
-  repository = github_repository.repository.name
-  branch     = github_branch_default.default.branch
-  file       = "README.md"
-  content = templatefile("${path.module}/README.md.tftpl", {
-    name        = var.name
-    description = var.description
-  })
-  commit_message      = "Managed by IaC"
-  commit_author       = "InfrastructureAsCode"
-  commit_email        = "infrastructure@powerd6.org"
-  overwrite_on_create = false
-
-  lifecycle {
-    ignore_changes = [
-      content,
-      commit_message,
-      commit_author,
-      commit_email
-    ]
-  }
-}
-
 output "repository_url" {
   value       = github_repository.repository.git_clone_url
   description = "The URL of the repository for cloning purposes."
