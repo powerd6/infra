@@ -24,6 +24,14 @@ This is useful for bootstrapping the project or to recover from a total disaster
 
 These are the steps that will be executed:
 
+1. Cleanup local directory of states <font color="red">(optional)</font>
+
+    Remove previously executed terraform states, otherwise the procedure will fail.
+
+    ```bash
+    rm -rf **/.terraform
+    ```
+
 1. Change into bootstrap mode:
 
     Set the environment variable  `IS_BOOTSTRAP` set to true.
@@ -85,6 +93,8 @@ The final script looks something like this:
 <summary>Click to expand</summary>
 
 ```bash
+clear
+rm -rf **/.terraform         
 export IS_BOOTSTRAP=true
 
 echo "Input ELEPHANTSQL_APIKEY:"
@@ -93,12 +103,15 @@ export ELEPHANTSQL_APIKEY
 
 terragrunt run-all apply
 
+echo "The last command should have failed. This is expected"
+
 export PG_CONN_STR=$(jq -r '.outputs.psql_url.value' stages/0/state/terraform.tfstate)
 
 unset IS_BOOTSTRAP
 
 terragrunt run-all apply
 
+echo "The last command should have failed. This is expected"
 echo "Migration done"
 
 terragrunt run-all apply
