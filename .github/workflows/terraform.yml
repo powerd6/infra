@@ -30,6 +30,14 @@ jobs:
             echo ACTION_NAME=plan
             echo ACTION_COMMAND=plan -detailed-exitcode
           ) >> "$GITHUB_ENV"
+      - name: "Set workflow action: Push"
+        if: github.event_name == 'push'
+        run: |-
+          echo "Setting action to plan"
+          (
+            echo ACTION_NAME=plan
+            echo ACTION_COMMAND=plan -detailed-exitcode
+          ) >> "$GITHUB_ENV"
       - name: "Set workflow action: Manually ran on main"
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         run: |-
