@@ -10,3 +10,7 @@ terraform {
     }
   }
 }
+
+provider "elephantsql" {
+  # must provide ELEPHANTSQL_APIKEY
+}

@@ -1,7 +1,3 @@
-provider "elephantsql" {
-  # must provide ELEPHANTSQL_APIKEY
-}
-
 resource "elephantsql_instance" "tfstate" {
   name   = "tfstate"
   plan   = "turtle" # The free tier

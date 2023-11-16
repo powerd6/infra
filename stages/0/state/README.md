@@ -1,4 +1,4 @@
-# 0: state
+# state
 
 This is the absolute first stage that needs to be executed.
 
