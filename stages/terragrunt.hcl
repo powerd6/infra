@@ -20,6 +20,7 @@ locals {
       type = "pg"
       config = {
         schema_name = replace("stages/${path_relative_to_include()}", "/", "-")
+        conn_str = get_env("PG_CONN_STR")
       }
     }
   }

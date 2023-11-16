@@ -2,7 +2,7 @@ resource "gandi_domain" "powerd6_org" {
   name = "powerd6.org"
   owner {
     type        = "person"
-    given_name  = "Hector"
+    given_name  = "Héctor"
     family_name = "Castelli Zacharias"
     phone       = "+34.677059383"
     street_addr = "Rua Canido 57"
