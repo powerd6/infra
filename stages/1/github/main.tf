@@ -1,21 +1,3 @@
-terraform {
-  required_version = ">= 1.6.0"
-  backend "pg" {
-    schema_name = "1-github"
-  }
-  required_providers {
-    github = {
-      source  = "integrations/github"
-      version = "5.42.0"
-    }
-  }
-}
-
-# Configure the GitHub Provider
-provider "github" {
-  owner = "powerd6" # This stage runs as the powerd6 organization
-}
-
 resource "github_organization_settings" "powerd6" {
   name          = "powerd6"
   description   = "A remixable TTRPG built for sharing"
@@ -50,4 +32,16 @@ output "gh_org_id" {
   value       = github_organization_settings.powerd6.id
   sensitive   = true
   description = "The organization ID as-shown in the Github API. This is useful for automation and programatic use, as some APIs do not accept the organization name as a parameter."
+}
+
+module "github_token_admin" {
+  source = "../../modules/env"
+
+  var_name = "GITHUB_TOKEN"
+}
+
+output "github_token_admin" {
+  value       = module.github_token_admin.value
+  description = "The GitHub Organization admin token with correct permissions."
+  sensitive   = true
 }
