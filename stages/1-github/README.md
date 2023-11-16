@@ -31,6 +31,7 @@ A GitHub Personal Access Token (PAT) with the following permissions:
   - Administration: Read and write
   - Commit statuses: Read and write
   - Contents: Read and write
+  - Issues: Read and write
   - Metadata: Read-only
 - Organization permissions
   - Administration: Read and write

@@ -1,15 +1,3 @@
-terraform {
-  # TODO: Implement a switch to move state to PG backend and document it for disaster recovery scenarios.
-  # TODO: Add PG backend stage 0 to workflows.
-  required_version = ">= 1.6.0"
-  required_providers {
-    elephantsql = {
-      source  = "elephantsql/elephantsql"
-      version = "0.0.1"
-    }
-  }
-}
-
 provider "elephantsql" {
   # must provide ELEPHANTSQL_APIKEY
 }

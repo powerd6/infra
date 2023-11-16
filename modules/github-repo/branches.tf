@@ -33,10 +33,6 @@ resource "github_branch_protection" "protect_main" {
     require_last_push_approval = true
   }
 
-  required_status_checks {
-    strict = true
-  }
-
   push_restrictions    = var.org_administrators
   force_push_bypassers = var.org_administrators
 }

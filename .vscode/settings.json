@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "**/*.md.tftpl": "markdown"
+    "**/*.md.tftpl": "markdown",
+    "**/*.tf.ignore": "terraform"
   },
   "cSpell.words": [
     "elephantsql",

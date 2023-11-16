@@ -1,0 +1,129 @@
+name: Terraform
+
+concurrency:
+    cancel-in-progress: false
+    group: '${{ github.workflow }}'
+
+on:
+    push:
+      branches:
+        - main
+    pull_request:
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+  set_command:
+    name: Set command
+    runs-on: ubuntu-latest
+    outputs:
+      action_name: ${{ steps.set_output.outputs.action_name }}
+      action_command: ${{ steps.set_output.outputs.action_command }}
+    steps:
+      - name: "Set workflow action: Pull request"
+        if: github.event_name == 'pull_request'
+        run: |-
+          echo "Setting action to plan"
+          (
+            echo ACTION_NAME=plan
+            echo ACTION_COMMAND=plan -detailed-exitcode
+          ) >> "$GITHUB_ENV"
+      - name: "Set workflow action: Manually ran on main"
+        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+        run: |-
+          echo "Setting action to apply"
+          (
+            echo ACTION_NAME=apply
+            echo ACTION_COMMAND=apply -auto-approve
+          ) >> "$GITHUB_ENV"
+      - name: Set output
+        id: set_output
+        run: |-
+          echo "Action name: $ACTION_NAME"
+          echo "action_name=$ACTION_NAME" >> "$GITHUB_OUTPUT"
+          echo "Action command: $ACTION_COMMAND"
+          echo "action_command=$ACTION_COMMAND" >> "$GITHUB_OUTPUT"
+  check_secrets:
+    name: Check secrets
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        secretName:
+          - ELEPHANTSQL_APIKEY
+          - PG_CONN_STR
+          - GH_ORG_ADMIN
+          - GANDI_KEY
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Check: ${matrix.secretName}"
+        uses: ./.github/actions/check-env-var
+        with:
+          env_var: ${{ secrets[matrix.secretName] }}
+  stage_0:
+    name: "Stage 0: state"
+    needs: [set_command, check_secrets]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: opentofu/setup-opentofu@v1
+      - name: ${{ needs.set_command.outputs.action_name }}
+        env:
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+        working-directory: stages/0-state
+        run: |-
+          tofu init
+          tofu ${{ needs.set_command.outputs.action_command }} -lock-timeout=3s -input=false
+  stage_1:
+    name: "Stage 1: github"
+    needs: [set_command, stage_0]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: opentofu/setup-opentofu@v1
+      - name: ${{ needs.set_command.outputs.action_name }}
+        env:
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          GITHUB_TOKEN: ${{ secrets.GH_ORG_ADMIN }}
+
+          TF_VAR_elephantsql_api_key: ${{ secrets.ELEPHANTSQL_APIKEY }}
+          TF_VAR_pg_conn_str: ${{ secrets.PG_CONN_STR }}
+          TF_VAR_gh_org_admin: ${{ secrets.GH_ORG_ADMIN }}
+          TF_VAR_gandi_key: ${{ secrets.GANDI_KEY }}
+          TF_VAR_improvmx_api_token: ${{ secrets.IMPROVMX_API_TOKEN }}
+        working-directory: stages/1-github
+        run: |-
+          tofu init
+          tofu ${{ needs.set_command.outputs.action_command }} -lock-timeout=3s -input=false
+  stage_2:
+    name: "Stage 2: domain"
+    needs: [set_command, stage_1]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: opentofu/setup-opentofu@v1
+      - name: ${{ needs.set_command.outputs.action_name }}
+        env:
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          GANDI_KEY: ${{ secrets.GANDI_KEY }}
+        working-directory: stages/2-domain
+        run: |-
+          tofu init
+          tofu ${{ needs.set_command.outputs.action_command }} -lock-timeout=3s -input=false
+  stage_3:
+    name: "Stage 3: email"
+    needs: [set_command, stage_2]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: opentofu/setup-opentofu@v1
+      - name: ${{ needs.set_command.outputs.action_name }}
+        env:
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
+        working-directory: stages/3-email
+        run: |-
+          tofu init
+          tofu ${{ needs.set_command.outputs.action_command }} -lock-timeout=3s -input=false
