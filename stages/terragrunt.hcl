@@ -7,7 +7,7 @@ inputs = {
 
 locals {
   # Change this to true to run first-time setup commands
-  is_bootstrap = get_env("IS_BOOTSTRAP", "false")
+  is_bootstrap = get_env("IS_BOOTSTRAP", false)
   # Set the stage backend to something similar to `stage-0-state` based on folder structure
   backend_config = {
     # Used only for first-time setup. Requires migration to remote state.

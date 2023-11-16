@@ -5,6 +5,7 @@ variable "members" {
 }
 
 resource "github_membership" "members" {
+  depends_on = [ github_organization_settings.powerd6 ]
   for_each = var.members
   username = each.value
   role     = "member"
@@ -17,6 +18,7 @@ variable "administrators" {
 }
 
 resource "github_membership" "admins" {
+  depends_on = [ github_organization_settings.powerd6 ]
   for_each = var.administrators
   username = each.value
   role     = "admin"

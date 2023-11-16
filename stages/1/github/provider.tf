@@ -9,5 +9,5 @@ terraform {
 
 # Configure the GitHub Provider
 provider "github" {
-  owner = "powerd6" # This stage runs as the powerd6 organization
+  # owner = "powerd6" # This stage runs as the powerd6 organization
 }
