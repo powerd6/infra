@@ -1,18 +1,10 @@
 # github
 
-This setups the GitHub organization and it's repositories.
+This setups the GitHub organization and basic access controls.
 
 ## Inputs
 
 You must provide the following environment variables:
-
-### `PG_CONN_STR`
-
-The elephantSQL API key. Fetched locally once, then saved to GitHub Organization
- secrets for future use.
-
-Fetched once from stage 0, with the following command: `tofu output -raw elephantsql_api_key`.
-From this moment forward, available as a GitHub Organization secret.
 
 ### `GITHUB_TOKEN`
 

@@ -16,7 +16,7 @@ This project consists of two main parts: stages and modules.
 Stages are logical separation between systems based on the order they need to be
  provisioned in.
 
-Stages are named with the following convention: `<order>-<name>`.
+Stages are named with the following convention: `<order>/<name>`.
 
 Stages with the same order can be executed in parallel.
 

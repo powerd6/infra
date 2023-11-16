@@ -1,5 +1,3 @@
-
-
 resource "improvmx_email_forward" "catch_all" {
   domain            = data.terraform_remote_state.domain.outputs.domain_name
   alias_name        = "*"

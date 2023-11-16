@@ -1,19 +1,3 @@
-terraform {
-  required_version = ">= 1.6.0"
-  backend "pg" {
-    schema_name = "3-email"
-  }
-  required_providers {
-    improvmx = {
-      source  = "issyl0/improvmx"
-      version = "0.6.0"
-    }
-  }
-}
-
-provider "improvmx" {
-}
-
 data "terraform_remote_state" "domain" {
   backend = "pg"
   config = {

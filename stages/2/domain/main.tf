@@ -1,20 +1,3 @@
-terraform {
-  required_version = ">= 1.6.0"
-  backend "pg" {
-    schema_name = "2-domain"
-  }
-  required_providers {
-    gandi = {
-      source  = "go-gandi/gandi"
-      version = "2.2.4"
-    }
-  }
-}
-
-provider "gandi" {
-  # Configuration options
-}
-
 resource "gandi_domain" "powerd6_org" {
   name = "powerd6.org"
   owner {
