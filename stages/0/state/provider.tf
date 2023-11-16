@@ -8,5 +8,5 @@ terraform {
 }
 
 provider "elephantsql" {
-  # must provide ELEPHANTSQL_APIKEY
+  apikey = var.elephantsql_api_key
 }

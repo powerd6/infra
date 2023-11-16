@@ -17,9 +17,16 @@ From this moment forward, available as a GitHub Organization secret.
 This is how you execute this stack as a first-time setup.
 This is useful for bootstrapping the project or to recover from a total disaster.
 
-1. Run the stack with the variable `is_bootstrap` set to true:
+### 1: Change into bootstrap mode
 
-    ```bash
-    export IS_BOOTSTRAP=true
-    terragrunt run-all apply --work-dir=stages/
-    ```
+Set the environment variable  `IS_BOOTSTRAP` set to true: `export IS_BOOTSTRAP=true`
+
+### 2: Provide required inputs
+
+Provide all the required inputs which would normally be provided by GitHub secrets:
+
+#### `ELEPHANTSQL_APIKEY`
+
+A "Full Access key" for the [ElephantSQL](https://www.elephantsql.com/) account.
+
+Retrieved [here](https://customer.elephantsql.com/apikeys).
