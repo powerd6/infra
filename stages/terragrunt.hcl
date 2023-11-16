@@ -20,7 +20,7 @@ locals {
       type = "pg"
       config = {
         schema_name = replace("stages/${path_relative_to_include()}", "/", "-")
-        conn_str = get_env("PG_CONN_STR")
+        conn_str = get_env("PG_CONN_STR", false)
       }
     }
   }
@@ -43,6 +43,14 @@ terraform {
   # Set hook to skip modules when bootstrapping
   before_hook "skip_on_bootstrap" {
     commands     = ["apply", "plan"]
-    execute      = ["bash", find_in_parent_folders("check_skip_condition.sh")]
+    execute      = ["bash", find_in_parent_folders("skip_on_bootstrap.sh")]
+  }
+  after_hook "migrate_to_remote" {
+    commands     = ["init", "apply", "plan"]
+    execute      = local.is_bootstrap == "true" ? [
+      "bash",
+      "${get_repo_root()}/stages/check_local.sh", 
+      "${get_terragrunt_dir()}/migrate.sh"
+    ] : ["echo", "No migration needed. Not bootstrapping."]
   }
 }

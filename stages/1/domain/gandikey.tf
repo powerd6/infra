@@ -1,7 +1,7 @@
 variable "gandi_key" {
-  type = string
+  type        = string
   description = "The gandi.net API key"
-  sensitive = true
+  sensitive   = true
 }
 
 output "gandi_key" {

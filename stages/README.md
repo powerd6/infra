@@ -94,7 +94,10 @@ The final script looks something like this:
 
 ```bash
 clear
-rm -rf **/.terraform         
+rm -rf **/backend.tf
+rm -rf **/.terraform
+rm -rf **/terraform.lock.hcl
+
 export IS_BOOTSTRAP=true
 
 echo "Input ELEPHANTSQL_APIKEY:"
