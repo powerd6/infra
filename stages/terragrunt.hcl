@@ -7,7 +7,7 @@ inputs = {
 
 locals {
   # Change this to true to run first-time setup commands
-  is_bootstrap = get_env("IS_BOOTSTRAP")
+  is_bootstrap = get_env("IS_BOOTSTRAP", "false")
   # Set the stage backend to something similar to `stage-0-state` based on folder structure
   backend_config = {
     # Used only for first-time setup. Requires migration to remote state.
@@ -38,5 +38,10 @@ terraform {
   extra_arguments "retry_lock" {
     commands  = get_terraform_commands_that_need_locking()
     arguments = ["-lock-timeout=20m"]
+  }
+  # Set hook to skip modules when bootstrapping
+  before_hook "skip_on_bootstrap" {
+    commands     = ["apply", "plan"]
+    execute      = ["bash", find_in_parent_folders("check_skip_condition.sh")]
   }
 }

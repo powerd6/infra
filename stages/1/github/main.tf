@@ -33,15 +33,3 @@ output "gh_org_id" {
   sensitive   = true
   description = "The organization ID as-shown in the Github API. This is useful for automation and programatic use, as some APIs do not accept the organization name as a parameter."
 }
-
-module "github_token_admin" {
-  source = "../../modules/env"
-
-  var_name = "GITHUB_TOKEN"
-}
-
-output "github_token_admin" {
-  value       = module.github_token_admin.value
-  description = "The GitHub Organization admin token with correct permissions."
-  sensitive   = true
-}
