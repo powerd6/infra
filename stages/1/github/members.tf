@@ -1,6 +1,6 @@
 variable "members" {
   type        = set(string)
-  default     = toset([])
+  default     = []
   description = "A list of GitHub username that should be members of the organization. Administrators do not need to be included here."
 }
 
@@ -12,7 +12,7 @@ resource "github_membership" "members" {
 
 variable "administrators" {
   type        = set(string)
-  default     = toset([])
+  default     = []
   description = "A list of GitHub username that should be administrators in the organization"
 }
 
@@ -24,6 +24,6 @@ resource "github_membership" "admins" {
 
 output "administators" {
   value       = values({ for user in var.administrators : user => "/${user}" })
-  description = "The list of administrators for the organization, in the format `/${username}`."
+  description = "The list of administrators for the organization, in the format '/username'."
   sensitive   = true
 }
