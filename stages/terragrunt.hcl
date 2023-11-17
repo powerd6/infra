@@ -1,5 +1,5 @@
-terraform_binary = "tofu"
-terraform_version_constraint = ">= 1.6.0"
+terraform_binary              = "tofu"
+terraform_version_constraint  = ">= 1.6.0"
 terragrunt_version_constraint = ">= 0.53.0"
 
 inputs = {
@@ -12,7 +12,7 @@ locals {
   backend_config = {
     # Used only for first-time setup. Requires migration to remote state.
     bootstrap = {
-      type = "local"
+      type   = "local"
       config = {}
     }
     # Used normally.
@@ -20,7 +20,7 @@ locals {
       type = "pg"
       config = {
         schema_name = replace("stages/${path_relative_to_include()}", "/", "-")
-        conn_str = get_env("PG_CONN_STR", "")
+        conn_str    = get_env("PG_CONN_STR", "")
       }
     }
   }
@@ -31,7 +31,7 @@ remote_state {
     if_exists = "overwrite_terragrunt"
   }
   backend = local.bootstrap == "true" ? local.backend_config.bootstrap.type : local.backend_config.remote.type
-  config = local.bootstrap == "true" ? local.backend_config.bootstrap.config : local.backend_config.remote.config
+  config  = local.bootstrap == "true" ? local.backend_config.bootstrap.config : local.backend_config.remote.config
 }
 
 terraform {

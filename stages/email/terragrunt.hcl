@@ -8,7 +8,7 @@ include "state" {
 
 dependency "domain" {
   config_path = "${get_repo_root()}/stages/domain"
-  
+
   mock_outputs = {
     domain_name = "powerd6.org"
   }
@@ -16,7 +16,7 @@ dependency "domain" {
 
 
 inputs = {
-  gandi_key = get_env("GANDI_KEY")
+  gandi_key         = get_env("GANDI_KEY")
   improvm_api_token = get_env("IMPROVMX_API_TOKEN")
-  domain = dependency.domain.outputs.domain_name
+  domain            = dependency.domain.outputs.domain_name
 }
