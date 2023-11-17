@@ -1,7 +1,7 @@
 config {
   module = true
-  force = false
-  
+  force  = false
+
   disabled_by_default = false
 }
 
