@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v3
+        - uses: opentofu/setup-opentofu@v1
         - uses: ./.github/actions/install-terragrunt
           with:
             version: '0.53.4'
