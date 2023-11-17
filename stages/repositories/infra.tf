@@ -10,7 +10,7 @@ resource "github_repository_environment" "infra_live" {
   environment = "live"
   repository  = module.infrastructure.name
   deployment_branch_policy {
-    protected_branches     = true
+    protected_branches     = false
     custom_branch_policies = true
   }
 }
