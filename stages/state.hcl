@@ -1,6 +1,6 @@
 # Imported by all modules except state to use the correct variables for the pg state.
 dependency "state" {
-  config_path = "${get_repo_root()}/stages/0/state"
+  config_path = "${get_repo_root()}/stages/state"
 }
 
 terraform {

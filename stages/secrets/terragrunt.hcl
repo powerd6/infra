@@ -7,11 +7,11 @@ include "state" {
 }
 
 dependency "github" {
-  config_path = "${get_repo_root()}/stages/1/github"
+  config_path = "${get_repo_root()}/stages/github"
 }
 
 dependency "repositories" {
-  config_path = "${get_repo_root()}/stages/2/repositories"
+  config_path = "${get_repo_root()}/stages/repositories"
 }
 
 

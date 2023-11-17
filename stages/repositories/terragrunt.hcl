@@ -7,7 +7,7 @@ include "state" {
 }
 
 dependency "github" {
-  config_path = "${get_repo_root()}/stages/1/github"
+  config_path = "${get_repo_root()}/stages/github"
 }
 
 
