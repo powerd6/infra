@@ -37,8 +37,9 @@ resource "github_branch_protection" "protect_main" {
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     restrict_dismissals        = true
-    dismissal_restrictions     = var.org_administrators
     require_last_push_approval = true
+    dismissal_restrictions     = var.org_administrators
+    pull_request_bypassers     = var.org_administrators
   }
 
   push_restrictions    = var.org_administrators
