@@ -7,16 +7,16 @@ module "infrastructure" {
 }
 
 resource "github_repository_environment" "infra_live" {
-  environment  = "live"
-  repository   = module.infrastructure.outputs.name
+  environment = "live"
+  repository  = module.infrastructure.outputs.name
   deployment_branch_policy {
-    protected_branches          = true
+    protected_branches     = true
     custom_branch_policies = true
   }
 }
 
 resource "github_repository_environment_deployment_policy" "infra_live_main" {
-  repository        = module.infrastructure.outputs.name
-  environment       = github_repository_environment.infra_live.environment
+  repository     = module.infrastructure.outputs.name
+  environment    = github_repository_environment.infra_live.environment
   branch_pattern = module.infrastructure.outputs.main_branch
 }
