@@ -36,6 +36,12 @@ jobs:
             version: '0.53.4'
         - name: Initialize terraform
           working-directory: stages
+          env:
+            GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+            PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+            ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+            GANDI_KEY: ${{ secrets.GANDI_KEY }}
+            IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
           run: terragrunt run-all init
         - uses: terraform-linters/setup-tflint@v4.0.0
         - name: Show version

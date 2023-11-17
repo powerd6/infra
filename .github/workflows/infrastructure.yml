@@ -47,9 +47,21 @@ jobs:
       - name: Plan
         if: github.event_name == 'pull_request' || github.event_name == 'push'
         working-directory: stages
+        env:
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+          GANDI_KEY: ${{ secrets.GANDI_KEY }}
+          IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
         run: terragrunt run-all plan
       - name: Apply
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         working-directory: stages
+        env:
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+          GANDI_KEY: ${{ secrets.GANDI_KEY }}
+          IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
         run: terragrunt run-all apply
         
