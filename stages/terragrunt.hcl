@@ -42,7 +42,7 @@ terraform {
   }
   # Disable inputs, all values should be fetched from files or environment variables
   extra_arguments "disable_input" {
-    commands  = get_terraform_commands_that_need_input()
+    commands  = ["plan", "apply"]
     arguments = ["-input=false"]
   }
 }
