@@ -1,0 +1,97 @@
+name: Quality
+
+concurrency:
+    cancel-in-progress: true
+    group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+
+on:
+    push:
+      branches:
+        - main
+    pull_request:
+
+permissions:
+    contents: read
+
+jobs:
+  tofu-fmt:
+      name: Terraform format
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v3
+          - uses: opentofu/setup-opentofu@v1
+          - name: Check format
+            id: check
+            run: tofu fmt -check -recursive -diff
+  tflint:
+    name: TFLint
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: opentofu/setup-opentofu@v1
+          with:
+            tofu_wrapper: false
+        - uses: ./.github/actions/install-terragrunt
+          with:
+            version: '0.53.4'
+        - name: Initialize terraform
+          working-directory: stages
+          env:
+            GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+            PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+            ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+            GANDI_KEY: ${{ secrets.GANDI_KEY }}
+            IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
+          run: terragrunt run-all init
+        - uses: terraform-linters/setup-tflint@v4.0.0
+        - name: Show version
+          run: tflint --version
+        - name: Initialize
+          run: tflint --recursive --init
+        - name: Run
+          id: lint
+          run: tflint --recursive -f compact --minimum-failure-severity=warning --config "$(pwd)/.tflint.hcl"
+  hclfmt:
+    name: hclfmt
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: ./.github/actions/install-terragrunt
+          with:
+            version: '0.53.4'
+        - name: Check terragrunt HCL
+          run: terragrunt hclfmt --terragrunt-check --terragrunt-diff
+  markdown-lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: DavidAnson/markdownlint-cli2-action@v13
+          with:
+            globs: |
+              **/*.md
+              #**/.terraform/**/*.md
+  markdown-link-check:
+    name: Markdown Link Check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: gaurav-nelson/github-action-markdown-link-check@v1
+  action-lint:
+    name: Action Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Actionlint
+      id: get_actionlint
+      run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+    - name: Run Actionlint
+      run: ${{ steps.get_actionlint.outputs.executable }} -color
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: ShellCheck
+      uses: ludeeus/action-shellcheck@2.0.0
+  

@@ -1,0 +1,31 @@
+name: Install Terragrunt
+
+description: Installs Terragrunt
+
+inputs:
+  version:
+    description: The version to Install
+    required: true
+    default: '0.53.4'
+
+runs:
+  using: composite
+  steps:
+    - name: Download
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: gh release download v${{inputs.version}} --output terragrunt --clobber --pattern 'terragrunt_linux_amd64' --repo gruntwork-io/terragrunt
+    - name: Set permissions
+      shell: bash
+      run: chmod u+x terragrunt
+    - name: Move file
+      shell: bash
+      run: |-
+        mkdir -p $HOME/.local/bin
+        mv terragrunt $HOME/.local/bin/terragrunt
+    - name: Add to path
+      shell: bash
+      run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      

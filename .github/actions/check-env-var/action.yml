@@ -1,0 +1,22 @@
+name: Check environment variable
+
+description: Check if an environment variable is present
+
+inputs:
+  env_var:
+    description: 'The environment variable to check.'
+    required: true
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Check
+      shell: bash
+      run: |-
+        if [ -z "${{ inputs.env_var }}" ]; then
+          echo "Environment variable is empty!"
+          exit 1
+        else
+          echo "Environment variable is not empty."
+        fi
