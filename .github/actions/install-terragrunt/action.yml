@@ -13,7 +13,7 @@ runs:
   steps:
     - name: Download
       shell: bash
-      run: "curl https://github.com/gruntwork-io/terragrunt/releases/download/v${inputs.version}/terragrunt_linux_amd64 -o terragrunt"
+      run: "curl https://github.com/gruntwork-io/terragrunt/releases/download/v${{inputs.version}}/terragrunt_linux_amd64 -o terragrunt"
     - name: Set permissions
       shell: bash
       run: chmod u+x terragrunt
