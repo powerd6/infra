@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: opentofu/setup-opentofu@v1
-      - uses: ./.github/actions/check-env-var
+      - uses: ./.github/actions/install-terragrunt
         with:
           version: '0.53.4'
       - name: Plan
