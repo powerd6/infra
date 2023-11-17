@@ -34,6 +34,18 @@ jobs:
         - name: Run TFLint
           id: lint
           run: tflint --recursive -f compact --minimum-failure-severity=warning
+  hclfmt:
+    name: hclfmt
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - name: Check terragrunt HCL
+          uses: gruntwork-io/terragrunt-action@v2
+          with:
+            tf_version: 1.6.0
+            tg_version: 0.53.0
+            tg_dir: ./
+            tg_command: 'hclfmt --terragrunt-check --terragrunt-diff'
   markdown-lint:
     name: Markdown lint
     runs-on: ubuntu-latest
