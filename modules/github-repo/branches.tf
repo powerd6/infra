@@ -20,7 +20,7 @@ resource "github_branch_protection" "protect_main" {
   repository_id = github_repository.repository.node_id
   pattern       = github_branch.main.branch
 
-  enforce_admins = true
+  enforce_admins = false
 
   allows_deletions    = false
   allows_force_pushes = false
