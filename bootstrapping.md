@@ -26,6 +26,15 @@ This document will detail how to use this repository for the initial setup, shar
     export GANDI_KEY
     ```
 
+1. Get an [ImprovMX]https://improvmx.com/) API key.
+
+    Retrieve the API key , and save it under the `IMPROVMX_API_TOKEN` environment variable:
+
+    ```bash
+    read -s IMPROVMX_API_TOKEN
+    export IMPROVMX_API_TOKEN
+    ```
+
 1. Switch into bootstrap mode
 
     Set the `BOOTSTRAP` environment variable to `true`:
@@ -84,17 +93,17 @@ This document will detail how to use this repository for the initial setup, shar
     terragrunt run-all init
     ```
 
-    This step should fail.
+    This step should work. If it fails, the error message will tell you why.
+    Most likely, a variable that is required is not setup correctly.
 
 1. Import the existing GitHub organization into the state
 
     This is necessary because organizations cannot be created by terraform.
     
     ```bash
-    (
-        cd stages/1/github/ &&
-        tofu import github_organization_settings.powerd6 $GH_ORG_ID
-    )
+    cd stages/github
+    terragrunt import github_organization_settings.powerd6 $GH_ORG_ID
+    cd ../../
     ```
 
 1. Import the existing domain into the state
@@ -102,8 +111,57 @@ This document will detail how to use this repository for the initial setup, shar
     This is necessary because domains cannot be created by terraform.
     
     ```bash
-    (
-        cd stages/1/domain/ &&
-        tofu import gandi_domain.powerd6_org powerd6.org
-    )
+    cd stages/domain
+    terragrunt import gandi_domain.powerd6_org powerd6.org
+    cd ../../
     ```
+
+1. Delete the currently configured gandi.net DNS records
+
+    This is necessary because DNS records cannot be imported.
+
+    The desired state of the DNS records should be:
+
+    ```
+    @ 10800 IN SOA ns1.gandi.net. hostmaster.gandi.net. 1700185945 10800 3600 604800 10800
+    ```
+
+1. Import the existing email forwarding domain into the state
+
+    This is necessary because domains cannot be created by terraform.
+    
+    ```bash
+    cd stages/email
+    terragrunt import improvmx_domain.domain powerd6.org
+    cd ../../
+    ```
+
+1. Apply all the modules
+
+    From the root of the repository, run:
+
+    ```bash
+    terragrunt run-all apply
+    ```
+
+    This step should work. If it fails, the error message will tell you why.
+    Most likely, a variable that is required is not setup correctly.
+
+1. Switch out of the bootstrap mode
+
+    Unset the `BOOTSTRAP` environment variable:
+
+    ```bash
+    unset BOOTSTRAP
+    ```
+
+1. Apply all the modules
+
+    From the root of the repository, run:
+
+    ```bash
+    terragrunt run-all apply
+    ```
+
+    This step should work. If it fails, the error message will tell you why.
+    Most likely, a variable that is required is not setup correctly.

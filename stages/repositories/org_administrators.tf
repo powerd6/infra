@@ -1,4 +1,4 @@
 variable "org_administrators" {
-  type = set(string)
+  type        = set(string)
   description = "The list of organization administrators."
 }

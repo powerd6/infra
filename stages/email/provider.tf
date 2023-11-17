@@ -5,7 +5,7 @@ terraform {
       version = "2.2.4"
     }
     improvmx = {
-      source = "issyl0/improvmx"
+      source  = "issyl0/improvmx"
       version = "0.6.0"
     }
   }

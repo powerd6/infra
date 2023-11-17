@@ -1,5 +1,5 @@
 variable "domain" {
-  type = string
+  type        = string
   description = "The domain in which the aliases should be created"
 }
 
