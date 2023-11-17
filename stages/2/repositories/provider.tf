@@ -7,6 +7,12 @@ terraform {
   }
 }
 
+variable "gh_admin_token" {
+  type        = string
+  description = "The GitHub super-admin PAT for the organization"
+  sensitive   = true
+}
+
 # Configure the GitHub Provider
 provider "github" {
   owner = "powerd6" # This stage runs as the powerd6 organization

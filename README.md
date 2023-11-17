@@ -13,16 +13,10 @@ This project consists of two main parts: stages and modules.
 
 [![Terraform](https://github.com/powerd6/infrastructure/actions/workflows/terraform.yml/badge.svg?event=workflow_dispatch)](https://github.com/powerd6/infrastructure/actions/workflows/terraform.yml)
 
-Stages are logical separation between systems based on the order they need to be
- provisioned in.
+Stages are logical separation between systems, and can be, at first-glance,
+ provisioned individually.
 
-Stages are named with the following convention: `<order>/<name>`.
-
-Stages with the same order can be executed in parallel.
-
-Stages can only depend on stages that come before them (with a lower `order` number),
- and they do so by referencing the remote state. This means that anything that
- will be used by higher stages must be set as an output of the previous stages.
+Stages can only use environment variables or the outputs of other stages as input.
 
 ### Modules
 

@@ -3,7 +3,7 @@ resource "gandi_livedns_record" "improvmx_mx" {
   ttl    = 10800
   type   = "MX"
   values = ["10 mx1.improvmx.com.", "20 mx2.improvmx.com."]
-  zone   = data.terraform_remote_state.domain.outputs.domain_name
+  zone   = var.domain
 }
 
 resource "gandi_livedns_record" "improvmx_txt" {
@@ -11,5 +11,5 @@ resource "gandi_livedns_record" "improvmx_txt" {
   ttl    = 10800
   type   = "TXT"
   values = ["v=spf1 include:spf.improvmx.com ~all"]
-  zone   = data.terraform_remote_state.domain.outputs.domain_name
+  zone   = var.domain
 }

@@ -6,6 +6,6 @@ variable "elephantsql_api_key" {
 
 resource "github_actions_organization_secret" "elephantsql_api_key" {
   secret_name     = "ELEPHANTSQL_APIKEY"
-  visibility      = "selected"
   plaintext_value = var.elephantsql_api_key
+  visibility      = "all"
 }

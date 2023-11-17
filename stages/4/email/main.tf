@@ -1,8 +1,6 @@
-data "terraform_remote_state" "domain" {
-  backend = "pg"
-  config = {
-    schema_name = "2-domain"
-  }
+variable "domain" {
+  type = string
+  description = "The domain in which the aliases should be created"
 }
 
 locals {
@@ -10,6 +8,6 @@ locals {
 }
 
 resource "improvmx_domain" "domain" {
-  domain             = data.terraform_remote_state.domain.outputs.domain_name
+  domain             = var.domain
   notification_email = local.destination_email
 }

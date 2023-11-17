@@ -6,6 +6,6 @@ variable "improvmx_api_token" {
 
 resource "github_actions_organization_secret" "improvmx_api_token" {
   secret_name     = "IMPROVMX_API_TOKEN"
-  visibility      = "selected"
   plaintext_value = var.improvmx_api_token
+  visibility      = "all"
 }

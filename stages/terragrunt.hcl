@@ -7,7 +7,7 @@ inputs = {
 
 locals {
   # Change this to true to run first-time setup commands
-  is_bootstrap = get_env("IS_BOOTSTRAP", false)
+  bootstrap = get_env("BOOTSTRAP", false)
   # Set the stage backend to something similar to `stage-0-state` based on folder structure
   backend_config = {
     # Used only for first-time setup. Requires migration to remote state.
@@ -20,7 +20,7 @@ locals {
       type = "pg"
       config = {
         schema_name = replace("stages/${path_relative_to_include()}", "/", "-")
-        conn_str = get_env("PG_CONN_STR", false)
+        conn_str = get_env("PG_CONN_STR", "")
       }
     }
   }
@@ -30,8 +30,8 @@ remote_state {
     path      = "backend.tf"
     if_exists = "overwrite_terragrunt"
   }
-  backend = local.is_bootstrap == "true" ? local.backend_config.bootstrap.type : local.backend_config.remote.type
-  config = local.is_bootstrap == "true" ? local.backend_config.bootstrap.config : local.backend_config.remote.config
+  backend = local.bootstrap == "true" ? local.backend_config.bootstrap.type : local.backend_config.remote.type
+  config = local.bootstrap == "true" ? local.backend_config.bootstrap.config : local.backend_config.remote.config
 }
 
 terraform {
@@ -40,17 +40,14 @@ terraform {
     commands  = get_terraform_commands_that_need_locking()
     arguments = ["-lock-timeout=20m"]
   }
-  # Set hook to skip modules when bootstrapping
-  before_hook "skip_on_bootstrap" {
-    commands     = ["apply", "plan"]
-    execute      = ["bash", find_in_parent_folders("skip_on_bootstrap.sh")]
+  # Disable inputs, all values should be fetched from files or environment variables
+  extra_arguments "disable_input" {
+    commands  = get_terraform_commands_that_need_input()
+    arguments = ["-input=false"]
   }
-  after_hook "migrate_to_remote" {
-    commands     = ["init", "apply", "plan"]
-    execute      = local.is_bootstrap == "true" ? [
-      "bash",
-      "${get_repo_root()}/stages/check_local.sh", 
-      "${get_terragrunt_dir()}/migrate.sh"
-    ] : ["echo", "No migration needed. Not bootstrapping."]
+  # If possible, always copy the state into the newly configured backend
+  extra_arguments "migrate-backend" {
+    commands  = ["plan"]
+    arguments = ["-migrate-state", "-force-copy"]
   }
 }
