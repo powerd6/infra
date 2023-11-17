@@ -10,7 +10,7 @@ resource "github_branch_default" "default" {
 
 resource "null_resource" "always_run" {
   triggers = {
-    timestamp = "${timestamp()}"
+    timestamp = timestamp()
   }
 }
 
