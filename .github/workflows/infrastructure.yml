@@ -39,20 +39,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: opentofu/setup-opentofu@v1
+      - uses: ./.github/actions/check-env-var
+        with:
+          version: '0.53.4'
       - name: Plan
         if: github.event_name == 'pull_request' || github.event_name == 'push'
-        uses: gruntwork-io/terragrunt-action@v2
-        with:
-          tf_version: 1.6.0
-          tg_version: 0.53.0
-          tg_dir: ./stages/
-          tg_command: 'plan'
+        working-directory: stages
+        run: terragrunt run-all plan
       - name: Apply
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-        uses: gruntwork-io/terragrunt-action@v2
-        with:
-          tf_version: 1.6.0
-          tg_version: 0.53.0
-          tg_dir: ./stages/
-          tg_command: 'apply'
+        working-directory: stages
+        run: terragrunt run-all apply
         
