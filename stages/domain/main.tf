@@ -40,8 +40,3 @@ resource "gandi_nameservers" "ns" {
     "ns-19-c.gandi.net",
   ]
 }
-
-output "domain_ns" {
-  value       = gandi_nameservers.ns.nameservers
-  description = "The name servers used by the domain"
-}

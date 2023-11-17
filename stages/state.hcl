@@ -1,6 +1,10 @@
 # Imported by all modules except state to use the correct variables for the pg state.
 dependency "state" {
   config_path = "${get_repo_root()}/stages/state"
+
+  mock_outputs = {
+    psql_url = "to-be-defined"
+  }
 }
 
 terraform {

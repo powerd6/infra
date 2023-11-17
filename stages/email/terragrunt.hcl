@@ -8,6 +8,10 @@ include "state" {
 
 dependency "domain" {
   config_path = "${get_repo_root()}/stages/domain"
+  
+  mock_outputs = {
+    domain_name = "powerd6.org"
+  }
 }
 
 

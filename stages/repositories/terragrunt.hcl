@@ -8,6 +8,12 @@ include "state" {
 
 dependency "github" {
   config_path = "${get_repo_root()}/stages/github"
+  
+  mock_outputs = {
+    gh_org_id = "123456"
+    administators = ["/SomeUser"]
+    gh_admin_token = "github_pat_xxxx"
+  }
 }
 
 
