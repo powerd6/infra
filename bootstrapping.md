@@ -10,9 +10,11 @@ This document will detail how to use this repository for the initial setup,
 
 ## Steps
 
-1. Create an [ElephantSQL](https://www.elephantsql.com/) account and fetch an API key.
+1. Create an [ElephantSQL](https://www.elephantsql.com/) account and fetch an
+ API key.
 
-    Once the account is created, retrieve an API key store it under the `ELEPHANTSQL_APIKEY` environment variable:
+    Once the account is created, retrieve an API key store it under the
+     `ELEPHANTSQL_APIKEY` environment variable:
 
     ```bash
     read -s ELEPHANTSQL_APIKEY
@@ -21,7 +23,8 @@ This document will detail how to use this repository for the initial setup,
 
 1. Get the [gandi.net](https://gandi.net) API key.
 
-    Retrieve the API key (and not a PAT), and save it under the `GANDI_KEY` environment variable:
+    Retrieve the API key (and not a PAT), and save it under the `GANDI_KEY`
+     environment variable:
 
     ```bash
     read -s GANDI_KEY
@@ -30,7 +33,8 @@ This document will detail how to use this repository for the initial setup,
 
 1. Get an [ImprovMX]https://improvmx.com/) API key.
 
-    Retrieve the API key , and save it under the `IMPROVMX_API_TOKEN` environment variable:
+    Retrieve the API key , and save it under the `IMPROVMX_API_TOKEN` environment
+     variable:
 
     ```bash
     read -s IMPROVMX_API_TOKEN
@@ -53,7 +57,8 @@ This document will detail how to use this repository for the initial setup,
     export GH_ORG_ID=$(gh api /orgs/powerd6 | jq -r '.id')
     ```
 
-    Once created, enable the usage of Personal access tokens for the organization with the following settings:
+    Once created, enable the usage of Personal access tokens for the organization
+     with the following settings:
 
     - Allow access via fine-grained personal access tokens
     - Require administrator approval
@@ -61,7 +66,8 @@ This document will detail how to use this repository for the initial setup,
 
 1. Create a super-admin PAT for the GitHub organization
 
-    This token will be used for the creation and management of multiple aspects of the project.
+    This token will be used for the creation and management of multiple aspects
+     of the project.
 
     It should have the following permissions:
 
@@ -101,7 +107,7 @@ This document will detail how to use this repository for the initial setup,
 1. Import the existing GitHub organization into the state
 
     This is necessary because organizations cannot be created by terraform.
-    
+
     ```bash
     cd stages/github
     terragrunt import github_organization_settings.powerd6 $GH_ORG_ID
