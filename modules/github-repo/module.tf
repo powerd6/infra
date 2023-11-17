@@ -31,6 +31,7 @@ resource "github_repository" "repository" {
   allow_rebase_merge          = true
   allow_auto_merge            = false
   allow_update_branch         = true
+  delete_branch_on_merge      = true
 
   auto_init          = true
   archive_on_destroy = true
