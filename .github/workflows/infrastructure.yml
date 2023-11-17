@@ -53,7 +53,7 @@ jobs:
           ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
           GANDI_KEY: ${{ secrets.GANDI_KEY }}
           IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
-        run: terragrunt run-all plan
+        run: terragrunt run-all plan --terragrunt-non-interactive
       - name: Apply
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         working-directory: stages
@@ -63,5 +63,5 @@ jobs:
           ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
           GANDI_KEY: ${{ secrets.GANDI_KEY }}
           IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
-        run: terragrunt run-all apply
+        run: terragrunt run-all apply -auto-approve --terragrunt-non-interactive
         
