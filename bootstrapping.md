@@ -31,7 +31,7 @@ This document will detail how to use this repository for the initial setup,
     export GANDI_KEY
     ```
 
-1. Get an [ImprovMX]https://improvmx.com/) API key.
+1. Get an [ImprovMX](https://improvmx.com/) API key.
 
     Retrieve the API key , and save it under the `IMPROVMX_API_TOKEN` environment
      variable:
