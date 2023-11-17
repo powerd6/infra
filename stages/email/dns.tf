@@ -10,6 +10,6 @@ resource "gandi_livedns_record" "improvmx_txt" {
   name   = "@"
   ttl    = 10800
   type   = "TXT"
-  values = ["v=spf1 include:spf.improvmx.com ~all"]
+  values = ["\"v=spf1 include:spf.improvmx.com ~all\""]
   zone   = var.domain
 }
