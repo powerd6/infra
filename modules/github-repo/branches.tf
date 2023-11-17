@@ -8,12 +8,6 @@ resource "github_branch_default" "default" {
   branch     = github_branch.main.branch
 }
 
-resource "null_resource" "always_run" {
-  triggers = {
-    timestamp = timestamp()
-  }
-}
-
 resource "github_branch_protection" "protect_main" {
   depends_on = [github_repository_file.readme]
 
@@ -44,12 +38,6 @@ resource "github_branch_protection" "protect_main" {
 
   push_restrictions    = var.org_administrators
   force_push_bypassers = var.org_administrators
-
-  lifecycle {
-    replace_triggered_by = [
-      null_resource.always_run
-    ]
-  }
 }
 
 output "main_branch" {
