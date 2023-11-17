@@ -15,8 +15,8 @@ resource "null_resource" "always_run" {
 }
 
 resource "github_branch_protection" "protect_main" {
-  depends_on = [ github_repository_file.readme ]
-  
+  depends_on = [github_repository_file.readme]
+
   repository_id = github_repository.repository.node_id
   pattern       = github_branch.main.branch
 
