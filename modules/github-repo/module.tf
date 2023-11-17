@@ -57,6 +57,11 @@ output "repository_url_web" {
   description = "The URL of the repository in the Github webpage."
 }
 
+output "name" {
+  value       = github_repository.repository.name
+  description = "The name of the repository, to be used when referring to it programatically"
+}
+
 output "repo_id" {
   value       = github_repository.repository.repo_id
   description = "The ID of the repository, to be used when referring to it programatically"
