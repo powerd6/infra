@@ -13,8 +13,6 @@ runs:
   steps:
     - name: Check
       shell: bash
-      env:
-        GH_TOKEN: ${{ github.token }}
       run: |-
         if [ -z "${{ inputs.env_var }}" ]; then
           echo "Environment variable is empty!"

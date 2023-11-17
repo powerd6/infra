@@ -13,6 +13,8 @@ runs:
   steps:
     - name: Download
       shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: gh release download v${{inputs.version}} --output terragrunt --clobber --pattern 'terragrunt_linux_amd64' --repo gruntwork-io/terragrunt
     - name: Set permissions
       shell: bash
