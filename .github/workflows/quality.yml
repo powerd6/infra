@@ -32,10 +32,10 @@ jobs:
         - name: Show version
           run: tflint --version
         - name: Initialize
-          run: tflint --init
+          run: tflint --recursive --init
         - name: Run
           id: lint
-          run: tflint --recursive -f compact --minimum-failure-severity=warning
+          run: tflint --recursive -f compact --minimum-failure-severity=warning --config $(pwd)/.tflint.hcl 
   hclfmt:
     name: hclfmt
     runs-on: ubuntu-latest
