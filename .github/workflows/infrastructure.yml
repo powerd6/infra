@@ -45,7 +45,7 @@ jobs:
         with:
           tf_version: 1.6.0
           tg_version: 0.53.0
-          tg_dir: ./
+          tg_dir: ./stages/
           tg_command: 'plan'
       - name: Apply
         if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
@@ -53,6 +53,6 @@ jobs:
         with:
           tf_version: 1.6.0
           tg_version: 0.53.0
-          tg_dir: ./
+          tg_dir: ./stages/
           tg_command: 'apply'
         
