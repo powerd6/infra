@@ -11,7 +11,7 @@ This project consists of two main parts: stages and modules.
 
 ### Stages
 
-[![Terraform](https://github.com/powerd6/infrastructure/actions/workflows/terraform.yml/badge.svg?event=workflow_dispatch)](https://github.com/powerd6/infrastructure/actions/workflows/terraform.yml)
+[![Infrastructure](https://github.com/powerd6/infra/actions/workflows/infrastructure.yml/badge.svg?event=workflow_dispatch)](https://github.com/powerd6/infra/actions/workflows/infrastructure.yml)
 
 Stages are logical separation between systems, and can be, at first-glance,
  provisioned individually.
