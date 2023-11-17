@@ -117,7 +117,7 @@ This document will detail how to use this repository for the initial setup,
 1. Import the existing domain into the state
 
     This is necessary because domains cannot be created by terraform.
-    
+
     ```bash
     cd stages/domain
     terragrunt import gandi_domain.powerd6_org powerd6.org
@@ -128,23 +128,17 @@ This document will detail how to use this repository for the initial setup,
 
     This is necessary because DNS records cannot be imported.
 
-    The desired state of the DNS records should be:
-
-    ```
-    @ 10800 IN SOA ns1.gandi.net. hostmaster.gandi.net. 1700185945 10800 3600 604800 10800
-    ```
-
-1. Import the existing email forwarding domain into the state
+2. Import the existing email forwarding domain into the state
 
     This is necessary because domains cannot be created by terraform.
-    
+
     ```bash
     cd stages/email
     terragrunt import improvmx_domain.domain powerd6.org
     cd ../../
     ```
 
-1. Apply all the modules
+3. Apply all the modules
 
     From the root of the repository, run:
 
@@ -155,7 +149,7 @@ This document will detail how to use this repository for the initial setup,
     This step should work. If it fails, the error message will tell you why.
     Most likely, a variable that is required is not setup correctly.
 
-1. Fetch the valid PSQL connection string
+4. Fetch the valid PSQL connection string
 
     Set the `PG_CONN_STR` environment variable with:
 
@@ -165,7 +159,7 @@ This document will detail how to use this repository for the initial setup,
     cd ../../
     ```
 
-1. Switch out of the bootstrap mode
+5. Switch out of the bootstrap mode
 
     Unset the `BOOTSTRAP` environment variable:
 
@@ -173,7 +167,7 @@ This document will detail how to use this repository for the initial setup,
     unset BOOTSTRAP
     ```
 
-1. Migrate all the modules
+6. Migrate all the modules
 
     From the root of the repository, run:
 
@@ -184,7 +178,7 @@ This document will detail how to use this repository for the initial setup,
     This step should work. If it fails, the error message will tell you why.
     Most likely, a variable that is required is not setup correctly.
 
-1. Apply all the modules
+7. Apply all the modules
 
     From the root of the repository, run:
 
