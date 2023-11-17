@@ -147,6 +147,16 @@ This document will detail how to use this repository for the initial setup, shar
     This step should work. If it fails, the error message will tell you why.
     Most likely, a variable that is required is not setup correctly.
 
+1. Fetch the valid PSQL connection string
+
+    Set the `PG_CONN_STR` environment variable with:
+
+    ```bash
+    cd stages/state
+    export PG_CONN_STR=$(terragrunt output -raw psql_url)
+    cd ../../
+    ```
+
 1. Switch out of the bootstrap mode
 
     Unset the `BOOTSTRAP` environment variable:
@@ -154,6 +164,17 @@ This document will detail how to use this repository for the initial setup, shar
     ```bash
     unset BOOTSTRAP
     ```
+
+1. Migrate all the modules
+
+    From the root of the repository, run:
+
+    ```bash
+    terragrunt run-all init -migrate-state  -force-copy -lock=false
+    ```
+
+    This step should work. If it fails, the error message will tell you why.
+    Most likely, a variable that is required is not setup correctly.
 
 1. Apply all the modules
 
@@ -163,5 +184,4 @@ This document will detail how to use this repository for the initial setup, shar
     terragrunt run-all apply
     ```
 
-    This step should work. If it fails, the error message will tell you why.
-    Most likely, a variable that is required is not setup correctly.
+    This step should work and show no changes. If it does, then you are done!

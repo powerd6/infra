@@ -45,9 +45,4 @@ terraform {
     commands  = get_terraform_commands_that_need_input()
     arguments = ["-input=false"]
   }
-  # If possible, always copy the state into the newly configured backend
-  extra_arguments "migrate-backend" {
-    commands  = ["plan"]
-    arguments = ["-migrate-state", "-force-copy"]
-  }
 }
