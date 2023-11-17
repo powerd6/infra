@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "**/*.md.tftpl": "markdown",
+  },
+  "cSpell.words": [
+    "elephantsql",
+    "gandi",
+    "improvmx",
+    "powerd6",
+    "PSQL",
+    "terragrunt"
+  ]
+}
