@@ -19,7 +19,9 @@ runs:
       run: chmod u+x terragrunt
     - name: Move file
       shell: bash
-      run: mv terragrunt $HOME/.local/bin/terragrunt
+      run: |-
+        mkdir -p $HOME/.local/bin
+        mv terragrunt $HOME/.local/bin/terragrunt
     - name: Add to path
       shell: bash
       run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
