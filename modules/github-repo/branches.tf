@@ -51,3 +51,8 @@ resource "github_branch_protection" "protect_main" {
     ]
   }
 }
+
+output "main_branch" {
+  value       = github_branch.main.branch
+  description = "The name of the main branch of the repository, to be used when referring to it programatically"
+}
