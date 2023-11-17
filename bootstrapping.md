@@ -2,9 +2,11 @@
 
 In the case of first execution or of a disaster, this repository might not work properly.
 
-This document will detail how to use this repository for the initial setup, sharing detailed steps.
+This document will detail how to use this repository for the initial setup,
+ sharing detailed steps.
 
-> ❗️ **Important**: In the case of a disaster, not all of these steps are necessary and following them to the letter might cause further loss.
+> ❗️ **Important**: In the case of a disaster, not all of these steps are
+> necessary and following them to the letter might cause further loss.
 
 ## Steps
 
