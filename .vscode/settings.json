@@ -9,5 +9,6 @@
     "powerd6",
     "PSQL",
     "terragrunt"
-  ]
+  ],
+  "git.enableCommitSigning": true
 }
