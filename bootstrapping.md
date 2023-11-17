@@ -128,7 +128,7 @@ This document will detail how to use this repository for the initial setup,
 
     This is necessary because DNS records cannot be imported.
 
-2. Import the existing email forwarding domain into the state
+1. Import the existing email forwarding domain into the state
 
     This is necessary because domains cannot be created by terraform.
 
@@ -138,7 +138,7 @@ This document will detail how to use this repository for the initial setup,
     cd ../../
     ```
 
-3. Apply all the modules
+1. Apply all the modules
 
     From the root of the repository, run:
 
@@ -149,7 +149,7 @@ This document will detail how to use this repository for the initial setup,
     This step should work. If it fails, the error message will tell you why.
     Most likely, a variable that is required is not setup correctly.
 
-4. Fetch the valid PSQL connection string
+1. Fetch the valid PSQL connection string
 
     Set the `PG_CONN_STR` environment variable with:
 
@@ -159,7 +159,7 @@ This document will detail how to use this repository for the initial setup,
     cd ../../
     ```
 
-5. Switch out of the bootstrap mode
+1. Switch out of the bootstrap mode
 
     Unset the `BOOTSTRAP` environment variable:
 
@@ -167,7 +167,7 @@ This document will detail how to use this repository for the initial setup,
     unset BOOTSTRAP
     ```
 
-6. Migrate all the modules
+1. Migrate all the modules
 
     From the root of the repository, run:
 
@@ -178,7 +178,7 @@ This document will detail how to use this repository for the initial setup,
     This step should work. If it fails, the error message will tell you why.
     Most likely, a variable that is required is not setup correctly.
 
-7. Apply all the modules
+1. Apply all the modules
 
     From the root of the repository, run:
 
