@@ -60,6 +60,8 @@ jobs:
     name: "Terragrunt: Apply"
     needs: [plan]
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    environment:
+        name: "live"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
