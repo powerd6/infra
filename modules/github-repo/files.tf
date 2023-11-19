@@ -24,10 +24,10 @@ resource "github_repository_file" "readme" {
 }
 
 resource "github_repository_file" "vscode_settings" {
-  repository = github_repository.repository.name
-  branch     = github_branch_default.default.branch
-  file       = ".vscode/settings.json"
-  content = file("${path.module}/files/.vscode/settings.json.tftpl")
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.default.branch
+  file                = ".vscode/settings.json"
+  content             = file("${path.module}/files/.vscode/settings.json.tftpl")
   commit_message      = "chore(vscode.settings): Initialize with template"
   commit_author       = "InfrastructureAsCode"
   commit_email        = "infrastructure@powerd6.org"
@@ -44,10 +44,10 @@ resource "github_repository_file" "vscode_settings" {
 }
 
 resource "github_repository_file" "vscode_extensions" {
-  repository = github_repository.repository.name
-  branch     = github_branch_default.default.branch
-  file       = ".vscode/extensions.json"
-  content = file("${path.module}/files/.vscode/extensions.json.tftpl")
+  repository          = github_repository.repository.name
+  branch              = github_branch_default.default.branch
+  file                = ".vscode/extensions.json"
+  content             = file("${path.module}/files/.vscode/extensions.json.tftpl")
   commit_message      = "chore(vscode.extensions): Initialize with basic extensions"
   commit_author       = "InfrastructureAsCode"
   commit_email        = "infrastructure@powerd6.org"
