@@ -18,6 +18,8 @@ Stages are logical separation between systems, and can be, at first-glance,
 
 Stages can only use environment variables or the outputs of other stages as input.
 
+![Stage dependencies](./graph.png)
+
 ### Modules
 
 Modules are repeatable packages of code that can be used in stages to abstract
