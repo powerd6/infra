@@ -8,7 +8,7 @@ resource "github_repository_file" "readme" {
     name        = var.name
     description = var.description
   })
-  commit_message      = "Managed by IaC"
+  commit_message      = "chore(README): Initialize with template"
   commit_author       = "InfrastructureAsCode"
   commit_email        = "infrastructure@powerd6.org"
   overwrite_on_create = true
