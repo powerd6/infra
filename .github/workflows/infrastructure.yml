@@ -90,12 +90,11 @@ jobs:
         run: |
           git add "$GITHUB_WORKSPACE/graph.png"
           git commit -m "chore(graph): update graph dependencies"
-          git push origin HEAD:$GITHUB_REF
       - name: Push commit
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
         run: |
-          git push origin HEAD:$GITHUB_REF
+          git push origin "HEAD:$GITHUB_REF"
   apply:
     name: "Terragrunt: Apply"
     needs: [plan]
