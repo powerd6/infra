@@ -59,7 +59,7 @@ jobs:
   apply:
     name: "Terragrunt: Apply"
     needs: [plan]
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     environment: live
     runs-on: ubuntu-latest
     steps:
