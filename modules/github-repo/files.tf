@@ -22,3 +22,26 @@ resource "github_repository_file" "readme" {
     ]
   }
 }
+
+resource "github_repository_file" "vscode_settings" {
+  repository = github_repository.repository.name
+  branch     = github_branch_default.default.branch
+  file       = ".vscode/settings.json.tftpl"
+  content = templatefile("${path.module}/files/.vscode/settings.json.tftpl", {
+    name        = var.name
+    description = var.description
+  })
+  commit_message      = "chore(vscode): Initialize with template"
+  commit_author       = "InfrastructureAsCode"
+  commit_email        = "infrastructure@powerd6.org"
+  overwrite_on_create = true
+
+  lifecycle {
+    ignore_changes = [
+      content,
+      commit_message,
+      commit_author,
+      commit_email
+    ]
+  }
+}
