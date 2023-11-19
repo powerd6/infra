@@ -80,14 +80,14 @@ jobs:
           ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
           GANDI_KEY: ${{ secrets.GANDI_KEY }}
           IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
-        run: terragrunt graph-dependencies | sed '2d' | dot -T png > $GITHUB_WORKSPACE/graph.png
+        run: terragrunt graph-dependencies | sed '2d' | dot -T png > "$GITHUB_WORKSPACE/graph.png"
       - name: Commit and push updated graph
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add $GITHUB_WORKSPACE/graph.png
+          git add "$GITHUB_WORKSPACE/graph.png"
           git commit -m "chore(graph): update graph dependencies"
           git push
   apply:
