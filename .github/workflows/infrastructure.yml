@@ -56,6 +56,39 @@ jobs:
           GANDI_KEY: ${{ secrets.GANDI_KEY }}
           IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
         run: terragrunt run-all plan --terragrunt-non-interactive
+  graph:
+    name: "Terragrunt: Graph"
+    needs: [plan]
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install graphvix
+        run: sudo apt install graphviz
+      - uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_wrapper: false
+      - uses: ./.github/actions/install-terragrunt
+        with:
+          version: ${{ env.terragrunt_version }}
+      - name: Generate graph
+        working-directory: stages
+        env:
+          GH_ADMIN_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          PG_CONN_STR: ${{ secrets.PG_CONN_STR }}
+          ELEPHANTSQL_APIKEY: ${{ secrets.ELEPHANTSQL_APIKEY }}
+          GANDI_KEY: ${{ secrets.GANDI_KEY }}
+          IMPROVMX_API_TOKEN: ${{ secrets.IMPROVMX_API_TOKEN }}
+        run: terragrunt graph-dependencies | sed '2d' | dot -T png > "$GITHUB_WORKSPACE/graph.png"
+      - name: GitHub Commit & Push
+        uses: actions-js/push@v1.4
+        with:
+          github_token: ${{ secrets.GH_ADMIN_TOKEN }}
+          message: "chore(graph): update graph dependencies"
+          branch: ${{ github.head_ref }}
   apply:
     name: "Terragrunt: Apply"
     needs: [plan]
