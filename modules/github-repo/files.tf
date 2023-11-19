@@ -4,7 +4,7 @@ resource "github_repository_file" "readme" {
   repository = github_repository.repository.name
   branch     = github_branch_default.default.branch
   file       = "README.md"
-  content = templatefile("${path.module}/README.md.tftpl", {
+  content = templatefile("${path.module}/files/README.md.tftpl", {
     name        = var.name
     description = var.description
   })
