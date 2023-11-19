@@ -26,6 +26,6 @@ resource "github_repository_environment" "spec_release" {
 
 resource "github_repository_environment_deployment_policy" "spec_release_main" {
   repository     = module.specification.name
-  environment    = github_repository_environment.infra_live.environment
+  environment    = github_repository_environment.spec_release.environment
   branch_pattern = module.specification.main_branch
 }
