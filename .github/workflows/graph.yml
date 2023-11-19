@@ -1,4 +1,4 @@
-name: Infrastructure - Graph
+name: Dependency Graph
 
 concurrency:
     cancel-in-progress: true
