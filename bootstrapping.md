@@ -73,11 +73,13 @@ This document will detail how to use this repository for the initial setup,
 
     - Repository access: All repositories
     - Repository permissions:
+        - Actions: Read and write
         - Administration: Read and write
         - Commit statuses: Read and write
         - Contents: Read and write
         - Issues: Read and write
         - Metadata: Read-only
+        - Pull requests: Read and write
         - Secrets: Read and write
         - Workflows: Read and write
     - Organization permissions:
