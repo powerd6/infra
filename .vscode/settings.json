@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    "**/*.json.tftpl": "json",
     "**/*.md.tftpl": "markdown",
   },
   "cSpell.words": [
