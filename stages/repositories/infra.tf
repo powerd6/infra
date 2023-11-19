@@ -6,11 +6,6 @@ module "infra" {
   org_administrators = var.org_administrators
 }
 
-moved {
-  from = module.infrastructure
-  to   = module.infra
-}
-
 resource "github_repository_environment" "infra_live" {
   environment = "live"
   repository  = module.infra.name

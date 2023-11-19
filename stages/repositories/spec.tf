@@ -5,8 +5,3 @@ module "spec" {
   topics             = ["specification", "documentation"]
   org_administrators = var.org_administrators
 }
-
-moved {
-  from = module.specification
-  to   = module.spec
-}
