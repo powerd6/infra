@@ -60,7 +60,6 @@ jobs:
     name: "Terragrunt: Graph"
     needs: [plan]
     if: github.event_name == 'pull_request'
-    environment: live
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
