@@ -22,3 +22,18 @@ resource "gandi_livedns_record" "spec_gh-pages-cname" {
   values = ["powerd6.github.io."]
   zone   = var.domain
 }
+
+resource "github_repository_environment" "spec_github_pages" {
+  environment = "github-pages"
+  repository  = module.spec.name
+  deployment_branch_policy {
+    protected_branches     = false
+    custom_branch_policies = true
+  }
+}
+
+resource "github_repository_environment_deployment_policy" "spec_github_pages_releases" {
+  repository     = module.spec.name
+  environment    = github_repository_environment.spec_github_pages.environment
+  branch_pattern = "v*"
+}
