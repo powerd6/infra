@@ -77,6 +77,7 @@ This document will detail how to use this repository for the initial setup,
         - Administration: Read and write
         - Commit statuses: Read and write
         - Contents: Read and write
+        - Environments: Read and write
         - Issues: Read and write
         - Metadata: Read-only
         - Pages: Read and write
