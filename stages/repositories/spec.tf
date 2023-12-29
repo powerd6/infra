@@ -35,5 +35,5 @@ resource "github_repository_environment" "spec_github_pages" {
 resource "github_repository_environment_deployment_policy" "spec_github_pages_releases" {
   repository     = module.spec.name
   environment    = github_repository_environment.spec_github_pages.environment
-  branch_pattern = "v*"
+  branch_pattern = "releases/v*"
 }
