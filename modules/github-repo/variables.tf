@@ -23,5 +23,5 @@ variable "org_administrators" {
 variable "pages_cname" {
   type        = string
   description = "The GitHub Pages CNAME. When not blank, pages are enabled."
-  default = ""
+  default     = ""
 }
