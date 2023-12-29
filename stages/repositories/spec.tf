@@ -3,5 +3,6 @@ module "spec" {
   name               = "spec"
   description        = "This is the powerd6 specification, and it documents how the project behaves."
   topics             = ["specification", "documentation"]
+  pages_cname        = "https://spec.powerd6.org"
   org_administrators = var.org_administrators
 }
