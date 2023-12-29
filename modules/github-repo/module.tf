@@ -12,7 +12,7 @@ resource "github_repository" "repository" {
   description = var.description
   topics      = var.topics
 
-  homepage_url = var.pages_cname || null 
+  homepage_url = var.pages_cname != "" ? var.pages_cname : null 
 
   visibility = "public"
 
