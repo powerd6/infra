@@ -43,6 +43,14 @@ resource "github_repository" "repository" {
   vulnerability_alerts                    = true
   ignore_vulnerability_alerts_during_read = true
 
+  dynamic pages {
+    for_each = var.pages_cname != "" ? [1]: []
+    content {
+      build_type = "workflow"
+      cname = var.pages_cname
+    }
+  }
+
 }
 output "repository_url" {
   value       = github_repository.repository.git_clone_url

@@ -19,3 +19,9 @@ variable "org_administrators" {
   description = "The list of organization administrators that should have special permissions"
   default     = []
 }
+
+variable "pages_cname" {
+  type        = string
+  description = "The GitHub Pages CNAME. When not blank, pages are enabled."
+  default = ""
+}
