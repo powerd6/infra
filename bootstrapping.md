@@ -79,6 +79,7 @@ This document will detail how to use this repository for the initial setup,
         - Contents: Read and write
         - Issues: Read and write
         - Metadata: Read-only
+        - Pages: Read and write
         - Pull requests: Read and write
         - Secrets: Read and write
         - Workflows: Read and write
