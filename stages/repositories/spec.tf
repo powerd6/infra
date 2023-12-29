@@ -35,5 +35,6 @@ resource "github_repository_environment" "spec_github_pages" {
 resource "github_repository_environment_deployment_policy" "spec_github_pages_releases" {
   repository     = module.spec.name
   environment    = github_repository_environment.spec_github_pages.environment
+  # TODO: Need to find tag_pattern and fix it
   branch_pattern = "releases/v*"
 }
