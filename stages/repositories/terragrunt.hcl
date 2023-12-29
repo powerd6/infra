@@ -16,8 +16,18 @@ dependency "github" {
   }
 }
 
+dependency "domain" {
+  config_path = "${get_repo_root()}/stages/domain"
+
+  mock_outputs = {
+    domain_name = "powerd6.org"
+  }
+}
+
 
 inputs = {
+  gandi_key          = get_env("GANDI_KEY")
   gh_admin_token     = get_env("GH_ADMIN_TOKEN")
   org_administrators = dependency.github.outputs.administators
+  domain             = dependency.domain.outputs.domain_name
 }
