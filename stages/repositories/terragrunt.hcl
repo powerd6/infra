@@ -26,7 +26,7 @@ dependency "domain" {
 
 
 inputs = {
-  gandi_key         = get_env("GANDI_KEY")
+  gandi_key          = get_env("GANDI_KEY")
   gh_admin_token     = get_env("GH_ADMIN_TOKEN")
   org_administrators = dependency.github.outputs.administators
 }
