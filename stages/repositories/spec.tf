@@ -8,7 +8,7 @@ module "spec" {
 }
 
 resource "gandi_livedns_record" "spec_gh-pages-challenge" {
-  name   = "_github-pages-challenge-powerd6.spec"
+  name   = "_github-pages-challenge-powerd6.${module.spec.name}"
   ttl    = 10800
   type   = "TXT"
   values = ["\"812e1a3eee1c1521399fa597195914\""]
@@ -35,6 +35,6 @@ resource "github_repository_environment" "spec_github_pages" {
 resource "github_repository_environment_deployment_policy" "spec_github_pages_releases" {
   repository     = module.spec.name
   environment    = github_repository_environment.spec_github_pages.environment
-  # TODO: Need to find tag_pattern and fix it
+  # TODO: Fix to allow tag 'v*' when https://github.com/integrations/terraform-provider-github/issues/1974 is merged
   branch_pattern = "releases/v*"
 }
