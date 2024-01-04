@@ -40,7 +40,7 @@ resource "github_repository_environment_deployment_policy" "spec_github_pages_re
 }
 
 resource "github_repository_environment_deployment_policy" "spec_github_pages_main" {
-  repository  = module.spec.name
-  environment = github_repository_environment.spec_github_pages.environment
+  repository     = module.spec.name
+  environment    = github_repository_environment.spec_github_pages.environment
   branch_pattern = "main"
 }
