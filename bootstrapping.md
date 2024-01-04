@@ -87,6 +87,7 @@ This document will detail how to use this repository for the initial setup,
     - Organization permissions:
         - Administration: Read and write
         - Members: Read and write
+        - Projects: Read and write
         - Secrets: Read and write
         - Variables: Read and write
 
