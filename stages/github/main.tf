@@ -5,7 +5,7 @@ resource "github_organization_settings" "powerd6" {
   billing_email = "billing@powerd6.org"
   blog          = "https://powerd6.org"
 
-  has_organization_projects = false
+  has_organization_projects = true
   has_repository_projects   = false
 
   default_repository_permission = "read"
