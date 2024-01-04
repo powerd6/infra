@@ -38,3 +38,9 @@ resource "github_repository_environment_deployment_policy" "spec_github_pages_re
   # TODO: Fix to allow tag 'v*' when https://github.com/integrations/terraform-provider-github/issues/1974 is merged
   branch_pattern = "releases/v*"
 }
+
+resource "github_repository_environment_deployment_policy" "spec_github_pages_main" {
+  repository  = module.spec.name
+  environment = github_repository_environment.spec_github_pages.environment
+  branch_pattern = "main"
+}
